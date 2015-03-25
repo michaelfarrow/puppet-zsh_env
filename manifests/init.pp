@@ -17,7 +17,7 @@ class zsh_env {
 		}
 
 		Exec <| title == "ohmyzsh::git clone ${name}" |> {
-			command => "( cd ${home} && git clone https://github.com/robbyrussell/oh-my-zsh.git ${home}/.oh-my-zsh ) || rmdir ${home}/.oh-my-zsh && exit 1",
+			command => "cd ${home}; git clone https://github.com/robbyrussell/oh-my-zsh.git ${home}/.oh-my-zsh || rmdir ${home}/.oh-my-zsh && exit 1",
 		}
 
 		ohmyzsh::install { "${name}": }
