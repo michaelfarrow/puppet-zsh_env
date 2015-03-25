@@ -1,0 +1,32 @@
+alias restartserver='sudo apachectl restart';
+alias o='open .'
+alias tug='tugboat'
+
+alias x='exit'
+
+function is_root() {
+	[ $UID -eq 0 ] && echo true && return
+
+	echo false
+}
+
+function s() {
+	[[ "$(is_root)" == "false" ]] && sudo -s
+}
+
+KEY_LOCATION=${HOME}/.ssh/id_rsa
+KEY_LOCATION_PUB=${KEY_LOCATION}.pub
+
+function key() {
+	[[ -f $KEY_LOCATION_PUB ]] && cat $KEY_LOCATION_PUB && return
+
+	echo "No key found, create one with 'keygen'"
+}
+
+function keygen() {
+	[[ -f $KEY_LOCATION ]] && echo "Key already exists" && key && return
+
+	ssh-keygen -t rsa -f $KEY_LOCATION -N ''
+
+	key
+}
