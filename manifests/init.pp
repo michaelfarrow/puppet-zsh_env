@@ -9,7 +9,11 @@ class zsh_env {
 				$home = "/${name}"
 			}
 		} else {
-			$home = "${ohmyzsh::params::home}/${name}"
+			if $osname == 'Darwin' {
+				$home = "/Users/${name}"
+			} else {
+				$home = "/home/${name}"
+			}
 		}
 
 		ohmyzsh::install { "${name}": }
