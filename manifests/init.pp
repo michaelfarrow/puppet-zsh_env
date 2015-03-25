@@ -16,6 +16,10 @@ class zsh_env {
 			}
 		}
 
+		Exec ["ohmyzsh::git clone ${name}"] {
+			command => "( cd ${home} && git clone https://github.com/robbyrussell/oh-my-zsh.git ${home}/.oh-my-zsh ) || rmdir ${home}/.oh-my-zsh && exit 1",
+		}
+
 		ohmyzsh::install { "${name}": }
 
 		file { "custom_zsh_theme for ${name}":
@@ -33,6 +37,7 @@ class zsh_env {
 	}
 
 	$users_split = split($users, "\n")
+
 	class { 'ohmyzsh': } -> setup_zsh { $users_split: }
 
 }
