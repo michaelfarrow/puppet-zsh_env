@@ -1,7 +1,5 @@
 class zsh_env {
 
-	class { 'ohmyzsh':}
-
 	define setup_zsh() {
 
 		if $name == 'root' {
@@ -30,8 +28,7 @@ class zsh_env {
 
 	}
 
-	# $users_split = split($users, "\n")
-	$users_split = ['vagrant']
+	$users_split = split($users, "\n")
 	setup_zsh { $users_split: }
 
 }
