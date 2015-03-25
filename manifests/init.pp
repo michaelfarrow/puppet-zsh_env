@@ -29,6 +29,6 @@ class zsh_env {
 	}
 
 	$users_split = split($users, "\n")
-	setup_zsh { $users_split: }
+	class { 'ohmyzsh': } -> setup_zsh { $users_split: }
 
 }
