@@ -21,7 +21,9 @@ class zsh_env {
 			cwd => $home,
 		}
 
-		ohmyzsh::install { "${name}": }
+		ohmyzsh::install { "${name}":
+			set_sh => true,
+		}
 
 		file { "custom_zsh_theme for ${name}":
 			ensure => present,
