@@ -30,14 +30,14 @@ class zsh_env {
 
 			file { "custom .zshrc for ${name}":
 				ensure => present,
-				path    => "${ohmyzsh::params::home}/.zshrc_custom",
+				path    => "${ohmyzsh::params::home}/${name}/.zshrc_custom",
 				source  => 'puppet:///modules/zsh_env/zshrc_custom',
 				require => Exec["ohmyzsh::git clone ${name}"],
 			}
 
 			file { "custom_zsh_theme for ${name}":
 				ensure => present,
-				path    => "${ohmyzsh::params}/.oh-my-zsh/themes/custom.zsh-theme",
+				path    => "${ohmyzsh::params::home}/${name}/.oh-my-zsh/themes/custom.zsh-theme",
 				source  => 'puppet:///modules/zsh_env/custom.zsh-theme',
 				require => Exec["ohmyzsh::git clone ${name}"],
 			}
