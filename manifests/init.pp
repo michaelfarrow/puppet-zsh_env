@@ -3,7 +3,7 @@ class zsh_env {
 	define setup_zsh() {
 
 		if $name == 'root' {
-			if $osname == 'Darwin' {
+			if $::osname == 'Darwin' {
 				$home = "var/${name}"
 				$install = false
 			} else {
@@ -11,7 +11,7 @@ class zsh_env {
 				$install = true
 			}
 		} else {
-			if $osname == 'Darwin' {
+			if $::osname == 'Darwin' {
 				$home = "/Users/${name}"
 			} else {
 				$home = "/home/${name}"
