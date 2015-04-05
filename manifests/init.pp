@@ -40,6 +40,11 @@ class zsh_env {
 			Exec <| title == "ohmyzsh::git clone ${name}" |> {
 				command => "git clone https://github.com/robbyrussell/oh-my-zsh.git ${home}/.oh-my-zsh",
 				cwd => $home,
+				onlyif  => "dscl . -read /Users/${name} NFSHomeDirectory | cut -d : -f 2 | xargs test -e",
+			}
+
+			Exec <| title == "ohmyzsh::cp .zshrc ${name}" |> {
+				onlyif  => "dscl . -read /Users/${name} NFSHomeDirectory | cut -d : -f 2 | xargs test -e",
 			}
 
 			ohmyzsh::install { "${name}":
