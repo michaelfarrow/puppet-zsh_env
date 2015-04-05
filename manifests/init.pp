@@ -50,7 +50,7 @@ class zsh_env {
 
 			ohmyzsh::theme { "${name}":
 				theme   => 'custom',
-				require => File["custom_zsh_theme for ${name}"],
+				# require => File["custom_zsh_theme for ${name}"],
 			}
 
 		}
