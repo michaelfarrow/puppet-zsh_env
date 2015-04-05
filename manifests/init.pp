@@ -1,8 +1,8 @@
 class zsh_env {
 
-	define setup_zsh() {
+	include ohmyzsh::params
 
-		# include ohmyzsh::params
+	define setup_zsh() {
 
 		if $name == 'root' {
 			if $::osfamily == 'Darwin' {
@@ -20,33 +20,33 @@ class zsh_env {
 				set_sh => true,
 			}
 
-			# if $name == 'root' {
-			# 	$home = $ohmyzsh::params::root
-			# } else {
-			# 	$home = "${ohmyzsh::params::home}/${name}"
-			# }
+			if $name == 'root' {
+				$home = $ohmyzsh::params::root
+			} else {
+				$home = "${ohmyzsh::params::home}/${name}"
+			}
 
 			ohmyzsh::plugins { "${name}": plugins => 'git git-extras common-aliases' }
 
-			# file_line { "${name}-custom-functions":
-			# 	path    => "${home}/.zshrc",
-			# 	line    => 'source $HOME/.zshrc_custom',
-			# 	require => Ohmyzsh::Install[$name],
-			# }
+			file_line { "${name}-custom-functions":
+				path    => "${home}/.zshrc",
+				line    => 'source $HOME/.zshrc_custom',
+				require => Ohmyzsh::Install[$name],
+			}
 
-			# file { "custom .zshrc for ${name}":
-			# 	ensure => present,
-			# 	path    => "${home}/.zshrc_custom",
-			# 	source  => 'puppet:///modules/zsh_env/zshrc_custom',
-			# 	require => Exec["ohmyzsh::git clone ${name}"],
-			# }
+			file { "custom .zshrc for ${name}":
+				ensure => present,
+				path    => "${home}/.zshrc_custom",
+				source  => 'puppet:///modules/zsh_env/zshrc_custom',
+				require => Exec["ohmyzsh::git clone ${name}"],
+			}
 
-			# file { "custom_zsh_theme for ${name}":
-			# 	ensure => present,
-			# 	path    => "${home}/.oh-my-zsh/themes/custom.zsh-theme",
-			# 	source  => 'puppet:///modules/zsh_env/custom.zsh-theme',
-			# 	require => Exec["ohmyzsh::git clone ${name}"],
-			# }
+			file { "custom_zsh_theme for ${name}":
+				ensure => present,
+				path    => "${home}/.oh-my-zsh/themes/custom.zsh-theme",
+				source  => 'puppet:///modules/zsh_env/custom.zsh-theme',
+				require => Exec["ohmyzsh::git clone ${name}"],
+			}
 
 			ohmyzsh::theme { "${name}":
 				theme   => 'custom',
