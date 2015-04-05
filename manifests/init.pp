@@ -1,5 +1,21 @@
 class zsh_env {
 
+	if $::osfamily == 'Darwin' {
+		if ! defined(Package['git']) {
+			package { 'git':
+				ensure   => present,
+				provider => brew,
+			}
+		}
+
+		if ! defined(Package['zsh']) {
+			package { 'zsh':
+				ensure   => present,
+				provider => brew,
+			}
+		}
+	}
+
 	define setup_zsh() {
 
 		if $name == 'root' {
