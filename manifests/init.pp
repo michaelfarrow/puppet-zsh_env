@@ -19,7 +19,7 @@ class zsh_env {
 			$install = true
 		}
 
-		if $install {
+		if $install == true {
 
 			Exec <| title == "ohmyzsh::git clone ${name}" |> {
 				command => "git clone https://github.com/robbyrussell/oh-my-zsh.git ${home}/.oh-my-zsh",
