@@ -34,11 +34,6 @@ class zsh_env {
 				require => Ohmyzsh::Install[$name],
 			}
 
-			file { "/etc/node_zsh":
-				ensure  => directory,
-				require => Exec["ohmyzsh::git clone ${name}"],
-			}
-
 			file { "custom .zshrc for ${name}":
 				ensure => present,
 				path    => "${home}/.zshrc_custom",
@@ -65,5 +60,10 @@ class zsh_env {
 	$users_split = split($users, "\n")
 
 	class { 'ohmyzsh': } -> setup_zsh { $users_split: }
+
+	file { "/etc/node_zsh":
+		ensure  => directory,
+		require => Exec["ohmyzsh::git clone ${name}"],
+	}
 
 }
