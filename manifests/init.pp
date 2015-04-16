@@ -34,6 +34,11 @@ class zsh_env {
 				require => Ohmyzsh::Install[$name],
 			}
 
+			file { "/etc/node_zsh":
+				ensure  => directory,
+				require => Exec["ohmyzsh::git clone ${name}"],
+			}
+
 			file { "custom .zshrc for ${name}":
 				ensure => present,
 				path    => "${home}/.zshrc_custom",
