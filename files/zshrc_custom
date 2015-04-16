@@ -30,3 +30,5 @@ function keygen() {
 
 	key
 }
+
+[[ -f $HOME/.zshrc_node_specific ]] && source $HOME/.zshrc_custom
