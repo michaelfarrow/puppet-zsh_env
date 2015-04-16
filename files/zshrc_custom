@@ -31,4 +31,4 @@ function keygen() {
 	key
 }
 
-[[ -f $HOME/.zshrc_node_specific ]] && source $HOME/.zshrc_custom
+[[ -f /etc/node_zsh/.zshrc_node_specific ]] && source /etc/node_zsh/.zshrc_node_specific
