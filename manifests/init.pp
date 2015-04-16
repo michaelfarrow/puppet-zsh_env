@@ -63,7 +63,6 @@ class zsh_env {
 
 	file { "/etc/node_zsh":
 		ensure  => directory,
-		require => Exec["ohmyzsh::git clone ${name}"],
 	}
 
 }
